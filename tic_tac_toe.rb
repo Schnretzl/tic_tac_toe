@@ -1,29 +1,42 @@
-class player
-    def initialize
-        @name = name
-        @symbol = symbol
-    end
+class Player
+  def initialize
+    @name = name
+    @symbol = symbol
+  end
+
+  attr_reader :name, :symbol
+
+  def play(coordinate)
+
+  end
 end
 
-class square
-    def initialize
-        @coordinate = coordinate
-        @played = false
-    end
+class Square
+  def initialize
+    @coordinate = coordinate
+    @played_symbol = nil
+  end
 end
 
-class board
-    def initialize(players, squares)
-        @players = players
-        @squares = squares
-    end
+class Board
+  def initialize(players, squares)
+    @players = players
+    @squares = squares
+  end
+  # @squares = [[A, B, C],
+  #             [D, E, F],
+  #             [G, H, I]]
+  attr_reader :players, :squares
 
-    def squares
+  def player
 
-    end
-    
-    def player
-
-    end
+  end
 
 end
+
+
+puts 'Name of player 1?'
+p1 = Player.new(gets.chomp, 'X')
+puts 'Name of player 2?'
+p2 = Player.new(gets.chomp, 'O')
+board = Board.new(p1, p2)
