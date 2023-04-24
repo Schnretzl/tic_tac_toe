@@ -41,29 +41,32 @@ end
 
 def check_line(board)
   ['ABC', 'DEF', 'GHI', 'ADG', 'BEH', 'CFI', 'AEI', 'CEG'].each do |line|
-    state = board[line[0]]
+    state = board.squares[line[0]].played_symbol
     next if state.nil?
 
-    return state if board[line[1]] == state && board[line[2]] == state
+    return state if board.squares[line[1]] == state && board[line[2]] == state
   end
 
   return nil
 end
 
 puts 'Name of player 1?'
-p1 = Player.new(1, gets.chomp, 'X')
+# p1 = Player.new(1, gets.chomp, 'X')
+p1 = Player.new(1, 'joe', 'X')
 puts 'Name of player 2?'
-p2 = Player.new(2, gets.chomp, 'O')
+# p2 = Player.new(2, gets.chomp, 'O')
+p2 = Player.new(2, 'mac', 'O')
 board = Board.new(p1, p2)
-current_player_symbol = "X"
-while(true)
-  puts "Where do you want to play?"
-  square = gets.chomp.upcase
-  board.squares[square].played_symbol = current_player_symbol
+current_player = p1
+loop do
+  puts 'Where do you want to play?'
+  #square = gets.chomp.upcase
+  square = 'A'
+  board.squares[square].played_symbol = current_player.symbol
   winner = check_line(board)
-  if !winner.nil?
-    puts "#{winner.name} wins!"
+  unless winner.nil?
+    puts "#{winner} wins!"
     break
   end
-  current_player_symbol == 'X'? current_player_symbol = 'O' : current_player_symbol = 'X'
+  current_player = current_player == p1 ? p2 : p1
 end
