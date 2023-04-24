@@ -51,17 +51,20 @@ def check_line(board)
 end
 
 puts 'Name of player 1?'
-# p1 = Player.new(1, gets.chomp, 'X')
-p1 = Player.new(1, 'joe', 'X')
+p1 = Player.new(1, gets.chomp, 'X')
+# p1 = Player.new(1, 'joe', 'X')
 puts 'Name of player 2?'
-# p2 = Player.new(2, gets.chomp, 'O')
-p2 = Player.new(2, 'mac', 'O')
+p2 = Player.new(2, gets.chomp, 'O')
+#p2 = Player.new(2, 'mac', 'O')
 board = Board.new(p1, p2)
 current_player = p1
 loop do
   puts "#{current_player.name}, where do you want to play?"
-square = STDIN.gets.chomp.upcase
-  #square = 'A'
+  square = STDIN.gets.chomp.upcase
+  until /[A-I]/ =~ square && board.squares[square].played_symbol.nil?
+    puts "Please enter a valid square"
+    square = STDIN.gets.chomp.upcase
+  end
   board.squares[square].played_symbol = current_player.symbol
   winner = check_line(board)
   unless winner.nil?
