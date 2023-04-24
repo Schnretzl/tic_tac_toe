@@ -44,7 +44,7 @@ def check_line(board)
     state = board.squares[line[0]].played_symbol
     next if state.nil?
 
-    return state if board.squares[line[1]] == state && board[line[2]] == state
+    return state if board.squares[line[1]].played_symbol == state && board.squares[line[2]].played_symbol == state
   end
 
   return nil
@@ -59,13 +59,13 @@ p2 = Player.new(2, 'mac', 'O')
 board = Board.new(p1, p2)
 current_player = p1
 loop do
-  puts 'Where do you want to play?'
-  #square = gets.chomp.upcase
-  square = 'A'
+  puts "#{current_player.name}, where do you want to play?"
+square = STDIN.gets.chomp.upcase
+  #square = 'A'
   board.squares[square].played_symbol = current_player.symbol
   winner = check_line(board)
   unless winner.nil?
-    puts "#{winner} wins!"
+    puts "#{current_player.name} wins!"
     break
   end
   current_player = current_player == p1 ? p2 : p1
