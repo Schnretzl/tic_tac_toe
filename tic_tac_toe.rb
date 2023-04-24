@@ -25,7 +25,10 @@ class Board
   def initialize(player1, player2)
     @player1 = player1
     @player2 = player2
-    @squares = Array.new(3) { |i| Array.new { |j| Square.new((i * 3 + j + 65).chr) } }
+    @squares = {}
+    ('A'..'I').each do |letter|
+      @squares[letter] = Square.new(letter)
+    end
   end
 
   attr_accessor :player1, :player2, :squares
@@ -42,5 +45,5 @@ p1 = Player.new(1, gets.chomp, 'X')
 puts 'Name of player 2?'
 p2 = Player.new(2, gets.chomp, 'O')
 board = Board.new(p1, p2)
-p p1.name
-p p2.name
+
+p board.squares['A'].played_symbol
