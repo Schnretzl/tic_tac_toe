@@ -50,12 +50,27 @@ def check_line(board)
   return nil
 end
 
+def display_board(board)
+  a_symbol = board.squares['A'].played_symbol || ''
+  b_symbol = board.squares['B'].played_symbol || ''
+  c_symbol = board.squares['C'].played_symbol || ''
+  puts "#{a_symbol.center(3)} | #{b_symbol.center(3)} | #{c_symbol.center(3)}"
+  puts "----+----+----"
+  d_symbol = board.squares['D'].played_symbol || ''
+  e_symbol = board.squares['E'].played_symbol || ''
+  f_symbol = board.squares['F'].played_symbol || ''
+  puts "#{d_symbol.center(3)} | #{e_symbol.center(3)} | #{f_symbol.center(3)}"
+  puts "----+---+----"
+  g_symbol = board.squares['G'].played_symbol || ''
+  h_symbol = board.squares['H'].played_symbol || ''
+  i_symbol = board.squares['I'].played_symbol || ''
+  puts "#{g_symbol.center(3)} | #{h_symbol.center(3)} | #{i_symbol.center(3)}"
+end
+
 puts 'Name of player 1?'
 p1 = Player.new(1, gets.chomp, 'X')
-# p1 = Player.new(1, 'joe', 'X')
 puts 'Name of player 2?'
 p2 = Player.new(2, gets.chomp, 'O')
-#p2 = Player.new(2, 'mac', 'O')
 board = Board.new(p1, p2)
 current_player = p1
 loop do
@@ -67,6 +82,7 @@ loop do
   end
   board.squares[square].played_symbol = current_player.symbol
   winner = check_line(board)
+  display_board(board)
   unless winner.nil?
     puts "#{current_player.name} wins!"
     break
