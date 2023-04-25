@@ -102,7 +102,7 @@ loop do
     puts "#{current_player.name} wins!"
     break
   end
-  if board.squares.all? { |k, v| v.nil? }
+  if board.squares.none? { |k, v| v.played_symbol.nil? }
     puts 'Game ends in a draw!'
     break
   end
