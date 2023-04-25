@@ -63,6 +63,7 @@ def display_board_moves(board)
 end
 
 def display_board(board)
+  puts
   a_symbol = board.squares['A'].played_symbol || ''
   b_symbol = board.squares['B'].played_symbol || ''
   c_symbol = board.squares['C'].played_symbol || ''
@@ -77,6 +78,7 @@ def display_board(board)
   h_symbol = board.squares['H'].played_symbol || ''
   i_symbol = board.squares['I'].played_symbol || ''
   puts "#{g_symbol.center(3)} | #{h_symbol.center(3)} | #{i_symbol.center(3)}"
+  puts
 end
 
 puts 'Name of player 1?'
@@ -93,12 +95,15 @@ loop do
     puts 'Please enter a valid square'
     coordinate = STDIN.gets.chomp.upcase
   end
-  # board.squares[coordinate].played_symbol = current_player.symbol
   current_player.play(coordinate, board)
   winner = check_line(board)
   display_board(board)
   unless winner.nil?
     puts "#{current_player.name} wins!"
+    break
+  end
+  if board.squares.all? { |k, v| v.nil? }
+    puts 'Game ends in a draw!'
     break
   end
   current_player = current_player == p1 ? p2 : p1
