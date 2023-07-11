@@ -1,4 +1,5 @@
 require_relative 'square'
+require_relative 'player'
 
 class Board
   attr_accessor :player1, :player2, :squares
