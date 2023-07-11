@@ -1,38 +1,6 @@
-class Square
-  attr_reader :coordinate
-  attr_accessor :played_symbol
-
-  def initialize(coordinate, played_symbol = nil)
-    @coordinate = coordinate
-    @played_symbol = nil
-  end
-end
-
-class Player
-  def initialize(player_number, name = "", symbol)
-    @name = name.empty? ? "Player #{player_number}" : name
-    @symbol = symbol
-  end
-
-  attr_reader :name, :symbol
-
-  def play(coordinate, board)
-    board.squares[coordinate].played_symbol = symbol
-  end
-end
-
-class Board
-  def initialize(player1, player2)
-    @player1 = player1
-    @player2 = player2
-    @squares = {}
-    ('A'..'I').each do |letter|
-      @squares[letter] = Square.new(letter)
-    end
-  end
-
-  attr_accessor :player1, :player2, :squares
-end
+require_relative 'player'
+require_relative 'board'
+require_relative 'square'
 
 def check_line(board)
   ['ABC', 'DEF', 'GHI', 'ADG', 'BEH', 'CFI', 'AEI', 'CEG'].each do |line|
