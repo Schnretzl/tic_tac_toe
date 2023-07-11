@@ -49,30 +49,30 @@ def display_board(board)
   puts
 end
 
-puts 'Name of player 1?'
-p1 = Player.new(1, gets.chomp, 'X')
-puts 'Name of player 2?'
-p2 = Player.new(2, gets.chomp, 'O')
-board = Board.new(p1, p2)
-current_player = p1
-loop do
-  puts "#{current_player.name}, where do you want to play?"
-  display_board_moves(board)
-  coordinate = STDIN.gets.chomp.upcase
-  until /[A-I]/ =~ coordinate && board.squares[coordinate].played_symbol.nil?
-    puts 'Please enter a valid square'
-    coordinate = STDIN.gets.chomp.upcase
-  end
-  current_player.play(coordinate, board)
-  winner = check_line(board)
-  display_board(board)
-  unless winner.nil?
-    puts "#{current_player.name} wins!"
-    break
-  end
-  if board.squares.none? { |k, v| v.played_symbol.nil? }
-    puts 'Game ends in a draw!'
-    break
-  end
-  current_player = current_player == p1 ? p2 : p1
-end
+# puts 'Name of player 1?'
+# p1 = Player.new(1, gets.chomp, 'X')
+# puts 'Name of player 2?'
+# p2 = Player.new(2, gets.chomp, 'O')
+# board = Board.new(p1, p2)
+# current_player = p1
+# loop do
+#   puts "#{current_player.name}, where do you want to play?"
+#   display_board_moves(board)
+#   coordinate = STDIN.gets.chomp.upcase
+#   until /[A-I]/ =~ coordinate && board.squares[coordinate].played_symbol.nil?
+#     puts 'Please enter a valid square'
+#     coordinate = STDIN.gets.chomp.upcase
+#   end
+#   current_player.play(coordinate, board)
+#   winner = check_line(board)
+#   display_board(board)
+#   unless winner.nil?
+#     puts "#{current_player.name} wins!"
+#     break
+#   end
+#   if board.squares.none? { |k, v| v.played_symbol.nil? }
+#     puts 'Game ends in a draw!'
+#     break
+#   end
+#   current_player = current_player == p1 ? p2 : p1
+# end
